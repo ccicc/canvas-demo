@@ -23,10 +23,23 @@ function load() {
     function drawCanvas(id, imgs) {
         const canvas = document.getElementById(id);
         const ctx = canvas.getContext('2d');
-        const [frameImg, birdImg] = imgs;
+        const [birdImg, frameImg] = imgs;
 
-        ctx.drawImage(frameImg, 300, 550);
-        ctx.drawImage(birdImg, 180, 360, 300, 550, 50, 50, 300, 550);
+        const birdW = 230;
+        const birdH = 320;
+        const frameW = 270;
+        const frameH = 380;
+
+        ctx.drawImage(birdImg, 141, 335, 400, 600, 50, 50, birdW, birdH);
+        ctx.drawImage(frameImg, 30, 20, frameW, frameH);
+
+        ctx.drawImage(birdImg, 141, 335, 400, 600, 200 + frameW, 100, birdW * 3 / 4, birdH * 3 / 4);
+        ctx.drawImage(frameImg, 180 + frameW, 80, frameW * 3 / 4, frameH * 3 / 4);
+
+        ctx.drawImage(
+            birdImg, 1470, 560, 270, 350, frameW * 2 + 260, 120, birdW * 2 / 3, birdH * 2 / 3,
+        );
+        ctx.drawImage(frameImg, frameW * 2 + 240, 100, frameW * 2 / 3, frameH * 2 / 3);
     }
 
     async function drawPicture(url1, url2) {
