@@ -1,6 +1,0 @@
-node_modules/*
-dist/*
-gulpfile.js
-webpack-dev-config.js
-webpack-pro-config.js
-postcss.config.js
