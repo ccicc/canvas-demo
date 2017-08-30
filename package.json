@@ -7,6 +7,7 @@
     "eslint": "eslint --ext .js src/",
     "clean:dist": "rimraf dist",
     "gulp": "gulp imgmin",
+    "deploy": "gulp deploy",
     "start": "webpack-dev-server --config webpack-dev-config.js --open",
     "build:webpack": "webpack --config webpack-pro-config.js --progress --color",
     "build": "npm-run-all clean:dist build:webpack gulp"
@@ -41,6 +42,7 @@
     "glob": "^7.1.2",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.0.0",
+    "gulp-gh-pages": "^0.5.4",
     "gulp-imagemin": "^3.3.0",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.5.3",
