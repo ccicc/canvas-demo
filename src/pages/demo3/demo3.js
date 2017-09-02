@@ -51,7 +51,7 @@ function load() {
         drawCanvas('canvas', imgs);
     }
 
-    drawPicture('./images/picture-bird.jpg', './images/picture-frame.png');
+    drawPicture('./images/demo3/picture-bird.jpg', './images/demo3/picture-frame.png');
 }
 
 window.onload = load;
