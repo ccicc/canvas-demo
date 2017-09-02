@@ -73,9 +73,17 @@ function createPromise(ballProps) {
     });
 }
 
+function drawFont(ctx) {
+    ctx.fillStyle = '#066';
+    ctx.font = '24px 微软雅黑';
+    ctx.textAlign = 'start';
+    ctx.fillText('小球可以随意拖动', 0, 30);
+}
+
 function createStep(ctx, ballsInstance) {
     return function step(timestap) {
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        drawFont(ctx);
         let isAllDone = true;
         ballsInstance.forEach((ball) => {
             // 获取球坐标
