@@ -1,16 +1,15 @@
-/* eslint-disable */ 
-
 // a = ∆v / ∆t 加速度公式
 // h = gt² / 2;
 
 class Ball {
     constructor(ballProps) {
         Object.assign(this, ballProps);
-        this.G = 500;   // 重力加速度
-        this.damping = 50;  // 衰减速度 
+        this.G = 500; // 重力加速度
+        this.damping = 50; // 衰减速度 
     }
 
     getStatus(et) {
+        // 获取当前帧球体坐标
         this.calculateCoor(et);
         return {
             x: this.x,
@@ -21,39 +20,41 @@ class Ball {
 
     calculateCoor(et) {
         // 单位间隔时间
-        let intervalTime = et - this.st;
+        const intervalTime = et - this.st;
         this.st = et;
-        if(this.isControlled)return;
+        if (this.isControlled) return;
         // 末速度
-        let ev = this.sv + intervalTime * this.G;
+        const ev = this.sv + intervalTime * this.G;
         // 单位时间内的位移
-        let s = this.sv * intervalTime + this.G * Math.pow(intervalTime, 2) / 2;
+        const s = this.sv * intervalTime + this.G * Math.pow(intervalTime, 2) / 2;
         // 距地面距离
-        let distanceFloor = this.y + s;
+        const distanceFloor = this.y + s;
 
-        if(distanceFloor > 500 - this.size) {
+        if (distanceFloor > 500 - this.size) {
             this.y = 500 - this.size;
+            // 如果末速度小于衰减速度则设置其为0
             this.sv = ev > this.damping ? -1 * (ev - this.damping) : 0;
         } else {
             this.y = distanceFloor;
-            this.sv = ev;       
+            this.sv = ev;
         }
     }
 
     control(element, mouse) {
-        this.isControlled = true,
+        this.isControlled = true;
         this.sv = 0;
         this.st = null;
         const ball = this;
-        let mouseMoveCb = function() {
+        function mouseMoveCb() {
             ball.x = mouse.x - ball.size / 2;
             ball.y = mouse.y - ball.size / 2;
-        };
-        let mouseUpCb = function() {
+        }
+        function mouseUpCb() {
+            // mouseup后解除绑定的事件，结束对球体的控制
             element.removeEventListener('mousemove', mouseMoveCb);
             element.removeEventListener('mouseup', mouseUpCb);
             ball.isControlled = false;
-        };
+        }
         element.addEventListener('mousemove', mouseMoveCb);
         element.addEventListener('mouseup', mouseUpCb);
     }
